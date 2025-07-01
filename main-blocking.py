@@ -5,7 +5,10 @@ from apscheduler.job import Job
 
 
 class SimpleCounter:
-    ''' simple counter class '''
+    ''' 
+    simple counter class, can be used instead of global counter
+    or function attribute
+    '''
     
     def __init__(self, start=0):
         self.value = start
@@ -14,8 +17,8 @@ class SimpleCounter:
         self.value += 1
         return self.value
 
-    def __str__(self):
-        return str(self.value)
+    def __int__(self):
+        return self.value
 
 
 def display(
@@ -25,6 +28,12 @@ def display(
         job_id=None,                                # job id instance guard
         scheduler:BaseScheduler=None                # scheduler instance guard
 ):
+    '''
+    this is the function to be scheduled
+    i added some fancy counter, scheduler and job
+    parameters just to explore them
+    and expoloit them to shut down the scheduler
+    '''
     print(f'display({message})')                    # print messsage
     
     runs = counter.increment()                      # increment counter
@@ -44,6 +53,11 @@ def display(
 
 
 def main():
+    '''
+    basic example, creates the basic objs,
+    schedules the job, modifies it and 
+    starts the scheduler
+    '''
     print("Hello from apscheduler-tutorials!")
     scheduler = BlockingScheduler()                 # create scheduler
     counter = SimpleCounter()                       # create counter

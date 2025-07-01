@@ -11,6 +11,11 @@ max_runs = 10
 def display(
         message:str,                                # message to display
 ):
+    '''
+    this is the function to be run from the job wrapper function
+    this time we leverage a global counter
+    but we experiment on exceptions
+    '''
     global max_runs                                 # use a global counter
     max_runs -= 1                                   # decrement counter
     if max_runs < 0:
@@ -19,6 +24,10 @@ def display(
 
 
 def run_job(fn, scheduler, *args):
+    '''
+    a simple wrapper to manage exceptions
+    in the real scheduled function
+    '''
     try:
         fn(*args)
     except KeyboardInterrupt:                       # manage CTRL-C
@@ -30,6 +39,11 @@ def run_job(fn, scheduler, *args):
 
 
 def main():
+    '''
+    basic example, creates the basic objs,
+    schedules the job, modifies it and 
+    starts the scheduler
+    '''
     print("Hello from apscheduler-tutorials!")
     scheduler = BlockingScheduler()                 # create scheduler
     
@@ -43,6 +57,7 @@ def main():
     
 
 if __name__ == "__main__":
+    ''' here im proving that exceptions do not propagate '''
     try:
         main()
     except KeyboardInterrupt:
