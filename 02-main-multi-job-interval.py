@@ -1,4 +1,3 @@
-from os import wait
 from time import sleep
 
 from apscheduler.schedulers.background import BackgroundScheduler, BlockingScheduler, BaseScheduler
