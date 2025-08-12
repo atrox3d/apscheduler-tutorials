@@ -52,7 +52,7 @@ def schedule_job():
     print(f'SCHEDULE_JOB| {when = !s}')
     
     scheduler.add_job( display, 'date', run_date=when, args=[str(when)])
-    
+
 
 def main():
     print('MAIN| getting scheduler')
